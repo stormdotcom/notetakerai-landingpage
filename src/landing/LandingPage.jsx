@@ -37,7 +37,7 @@ const LandingPage = () => {
         <img
           src={currentGif}
           alt="QuickNote AI in action"
-          className="w-full h-[90vh] object-cover transition-opacity duration-1000 ease-in-out"
+          className="w-full h-[90vh] object-cover transition-opacity duration-1000 ease-in-out blur"
           loading={currentGif === HeroGif ? "eager" : "lazy"}
         />
 
