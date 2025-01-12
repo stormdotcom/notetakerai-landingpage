@@ -29,7 +29,14 @@ const Home = () => {
               >
                 Ajmal Nasumudeen
               </a>.
-            </p>
+            </p> |
+
+            <a
+                href="https://quicknote.ajmalnasumudeen.in/privacy-policy"
+                rel="noopener noreferrer"
+              >
+                Privacy Policy
+              </a>.
           </footer>
         </div>
       );
