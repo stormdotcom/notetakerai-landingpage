@@ -1,14 +1,18 @@
 /* eslint-disable react/prop-types */
 import Logo from "@/assets/images/logo.png";
-import { Outlet } from "react-router-dom";
+import {  Outlet, useNavigate } from "react-router-dom";
 
 const Home = () => {
-    
+      const navigate = useNavigate();
+        const handleHome = () =>  navigate("../");
       return (
         <div className="flex flex-col min-h-screen bg-gray-100 text-gray-800">
           {/* Header */}
           <header className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-            <img src={Logo} alt="Logo" className="w-10 h-10" />
+            <div className="flex items-center cursor-pointer" onClick={handleHome}>
+            <img src={Logo} alt="Logo" className="w-10 h-10 cursor-pointer"  />
+            </div>
+           
             <h1 className="text-2xl font-bold text-green-600">QuickNote AI</h1>
           </header>
     
@@ -29,9 +33,9 @@ const Home = () => {
               >
                 Ajmal Nasumudeen
               </a>.
-            </p> |
+            </p> 
 
-            <a
+            <a  className="text-blue-500 mt-2"
                 href="https://quicknote.ajmalnasumudeen.in/privacy-policy"
                 rel="noopener noreferrer"
               >
