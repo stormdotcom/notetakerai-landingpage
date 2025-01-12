@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
           <section>
             <h2 className="text-2xl font-semibold text-green-600">1. Introduction</h2>
             <p>
-            Welcome to Quick Note AI. We care about your personal information and are committed to protection. This Privacy Policy sets out how we collect, use, store, and protect your information while you interact with our Chrome extension. By using our services, you agree to the terms described below. If you don't agree, we would appreciate it if you didn't use our services.
+            Welcome to Quick Note AI. We care about your personal information and are committed to protection. This Privacy Policy sets out how we collect, use, store, and protect your information while you interact with our Chrome extension. By using our services, you agree to the terms described below. If you don&apos;t agree, we would appreciate it if you didn&apos;t use our services.
             </p>
           </section>
 
