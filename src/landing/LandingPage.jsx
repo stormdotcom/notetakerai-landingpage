@@ -4,17 +4,18 @@ import HeroGif from "@/assets/gifs/1.gif";
 import HeroGifTwo from "@/assets/gifs/2.gif";
 import HeroGifThree from "@/assets/gifs/3.gif";
 import HeroGifFour from "@/assets/gifs/4.gif";
-import { useState, useEffect } from "react";
+import HeroGifFive from "@/assets/gifs/4.gif";
+import { useState, useEffect, useRef } from "react";
 
 const LandingPage = () => {
   const [currentGif, setCurrentGif] = useState(HeroGif);
-  const gifs = [HeroGif, HeroGifTwo, HeroGifThree, HeroGifFour];
-  let gifIndex = 0;
+  const gifs = [HeroGif, HeroGifTwo, HeroGifThree, HeroGifFour, HeroGifFive];
+  const gifIndex = useRef(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      gifIndex = (gifIndex + 1) % gifs.length;
-      setCurrentGif(gifs[gifIndex]);
+      gifIndex.current = (gifIndex.current + 1) % gifs.length;
+      setCurrentGif(gifs[gifIndex.current]);
     }, 5000); // Change GIF every 5 seconds
 
     return () => clearInterval(interval);
