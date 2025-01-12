@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
           <section>
             <h2 className="text-2xl font-semibold text-green-600">1. Introduction</h2>
             <p>
-              Welcome to <strong>Quick Note AI</strong>! We prioritize your privacy and are dedicated to protecting your personal data. This Privacy Policy explains how we collect, use, store, and safeguard your information when you interact with our Chrome extension. By using our services, you agree to the terms outlined in this policy. If you do not agree, please refrain from using our services.
+            Welcome to Quick Note AI. We care about your personal information and are committed to protection. This Privacy Policy sets out how we collect, use, store, and protect your information while you interact with our Chrome extension. By using our services, you agree to the terms described below. If you don't agree, we would appreciate it if you didn't use our services.
             </p>
           </section>
 
@@ -85,7 +85,11 @@ const PrivacyPolicy = () => {
           <section>
             <h2 className="text-2xl font-semibold text-green-600">5. Third-Party Services</h2>
             <p>
-              We collaborate with trusted third-party service providers to process audio data. These services strictly follow data protection standards and only access information necessary for transcription and summarization. We do not sell, trade, or rent your data to third parties for marketing purposes.
+            We partner with trusted third-party service providers in processing audio files. The service providers respect their privacy policies strictly and access information only necessary to transcribe or summarize.
+
+We do not sell, trade, or rent your data to marketing third parties. Third-party services are subject to their respective privacy policies. End.
+
+
             </p>
             <p>
               Third-party services are governed by their privacy policies, and we encourage you to review them for additional details.
@@ -106,7 +110,7 @@ const PrivacyPolicy = () => {
               <li><strong>Objection:</strong> Object to our processing of your data for specific purposes.</li>
             </ul>
             <p>
-              To exercise these rights, please contact us at <a href="mailto:support@quicknoteai.com" className="text-blue-600 underline">support@quicknoteai.com</a>. We will respond to your request within a reasonable timeframe.
+              To exercise these rights, please contact us at <a href="mailto:ajmaln73@gmail.com" className="text-blue-600 underline">ajmaln73@gmail.com</a>. We will respond to your request within a reasonable timeframe.
             </p>
           </section>
 
