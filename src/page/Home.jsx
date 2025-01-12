@@ -35,8 +35,8 @@ const Home = () => {
               </a>.
             </p> 
 
-            <a  className="text-blue-500 mt-2"
-                href="https://quicknote.ajmalnasumudeen.in/privacy-policy"
+            <a  className="text-blue-500 mt-2 cursor-pointer"
+                onClick={() => navigate("/privacy-policy")}
                 rel="noopener noreferrer"
               >
                 Privacy Policy
