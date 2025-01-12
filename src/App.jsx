@@ -1,14 +1,13 @@
-import { BrowserRouter } from 'react-router-dom'
 
 import Home from './page/Home'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import PrivacyPolicy from './page/privacy/PrivacyPolicy'
 import LandingPage from './page/landing/LandingPage';
 import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
     <Routes>
         <Route path="/" element={<Home />}>
         <Route index element={<LandingPage />} />
@@ -16,7 +15,7 @@ function App() {
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Route>
       </Routes>
-   </BrowserRouter>
+   </HashRouter>
   )
 }
 
