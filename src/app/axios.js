@@ -3,7 +3,7 @@ import axios from "axios";
 // Create Axios instance
 const apiClient = axios.create({
   // eslint-disable-next-line no-undef
-  baseURL: import.meta.env.API_BASE_URL,
+  baseURL: "https://llm-service-api-435l.onrender.com" //import.meta.env.API_BASE_URL,
   timeout: 10000, // Request timeout (10 seconds)
   headers: {
     "Content-Type": "application/json",
