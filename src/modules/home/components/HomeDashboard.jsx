@@ -1,9 +1,8 @@
-import SummaryCard from "@/components/custom/SummaryCard";
-
-import RightSidebar from "./RightSide";
-import { useEffect, useState } from "react";
 import { getRequest } from "@/app/service";
+import SummaryCard from "@/components/custom/SummaryCard";
+import { useEffect, useState } from "react";
 import Middle from "./Middle";
+import RightSidebar from "./RightSide";
 
 const HomeDashboard = () => {
   const [summaries, setSummary] = useState([]);
@@ -24,26 +23,24 @@ const HomeDashboard = () => {
       setLoading(false);
     }
   };
+
   return (
     <div className="flex flex-col lg:flex-row h-screen">
       {/* Left Sidebar */}
-      <div className="w-full lg:w-1/4 p-2 bg-gray-100">
-        <SummaryCard summaries={summaries} />
+      <div className="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 p-2 sm:p-3 bg-gray-100">
+        <SummaryCard summaries={summaries} loading={loading} />
       </div>
-      {loading && (
-        <div className="flex items-center justify-center h-full">
-          Loading...
-        </div>
-      )}
+
       {/* Middle Content */}
-      <div className="flex-grow p-4 bg-white">
-        <Middle summaries={summaries} />
+      <div className="flex-grow p-3 sm:p-4 bg-white">
+        <Middle summaries={summaries} loading={loading} />
       </div>
 
       {/* Right Sidebar */}
-      <div className="w-full lg:w-1/4 p-2 bg-gray-100">
-        <RightSidebar />
-      </div>
+    <div className="absolute sm:absolute md:sticky right-1 top-0 md:w-1/4 w-full p-2 sm:p-3 bg-gray-100">
+  <RightSidebar />
+</div>
+
     </div>
   );
 };

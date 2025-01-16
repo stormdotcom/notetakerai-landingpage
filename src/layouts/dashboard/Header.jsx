@@ -3,7 +3,7 @@ import { Bell, User } from "lucide-react";
 
 const DashboardHeader = () => {
   return (
-    <header className="flex justify-between items-center bg-gray-800 text-white p-4 shadow-md">
+    <header className="flex justify-between items-center  p-4 shadow-md">
       {/* Logo */}
       <h1 className="text-xl font-bold">🚀 Quick Note AI</h1>
 
