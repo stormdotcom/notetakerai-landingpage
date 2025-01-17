@@ -15,7 +15,7 @@ const HomeDashboard = () => {
 
   const fetchSummary = async () => {
     try {
-      const result = await getRequest("/summary", { sessionId: "default" });
+      const result = await getRequest("/summary");
       setSummary(result.data);
     } catch (error) {
       console.error("Failed to fetch posts:", error);
