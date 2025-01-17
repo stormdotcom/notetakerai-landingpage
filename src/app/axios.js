@@ -4,7 +4,7 @@ import axios from "axios";
 const apiClient = axios.create({
   // eslint-disable-next-line no-undef
   baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 10000, // Request timeout (10 seconds)
+  timeout: 30000, // Request timeout (10 seconds)
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
