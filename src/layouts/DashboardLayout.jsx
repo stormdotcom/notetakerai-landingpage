@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom";
-import DashboardHeader from "./dashboard/Header";
-import Sidebar from "@/components/custom/SideBar";
 import DashboardFooter from "./dashboard/Footer";
+import DashboardHeader from "./dashboard/Header";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-[91vh]">
       {/* Header */}
       <DashboardHeader />
 
@@ -14,7 +13,7 @@ const DashboardLayout = () => {
         {/* Sidebar */}
 
         {/* Main Content */}
-        <main className="flex-grow p-6 bg-gray-100">
+        <main className="flex-grow p-6 bg-gray-100 overflow-y-auto">
           <Outlet />
         </main>
       </div>

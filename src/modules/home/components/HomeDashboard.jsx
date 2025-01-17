@@ -28,24 +28,23 @@ const HomeDashboard = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen">
-      {/* Left Sidebar */}
-      <div className="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 p-2 sm:p-3 bg-gray-100">
-        <SummaryCard sessions={summaries} loading={loading} />
-      </div>
+<div className="grid grid-cols-3 lg:grid-cols-5 h-screen gap-1">
+  {/* Left Sidebar */}
+  <div className="col-span-1 lg:col-span-1 p-1 sm:p-1 bg-gray-100">
+    <SummaryCard sessions={summaries} loading={loading} />
+  </div>
 
-      {/* Middle Content */}
-      <div className="flex-grow p-3 sm:p-4 bg-white">
-        {/* <Outlet /> */}
-        {loading ? renderSkeleton() : <Middle />}
-      </div>
+  {/* Middle Content */}
+  <div className="lg:col-span-3 p-1 sm:p-2 bg-white overflow-y-auto">
+    {loading ? renderSkeleton() : <Middle />}
+  </div>
 
-      {/* Right Sidebar */}
-    <div className="absolute sm:absolute md:sticky right-1 top-0 md:w-1/4 w-full p-2 sm:p-3 bg-gray-100">
-  <RightSidebar />
+  {/* Right Sidebar */}
+  <div className="col-span-1 lg:col-span-1 p-2 sm:p-3 bg-gray-100">
+    <RightSidebar />
+  </div>
 </div>
 
-    </div>
   );
 };
 

@@ -1,16 +1,37 @@
+import ExportData from '@/components/custom/Modal/ExportData';
+import { FileEdit, Settings, Share2 } from 'lucide-react';
+
 const RightSidebar = () => {
   return (
-    <div className="relative w-full sm:w-3/4 md:w-full">
-      <h2 className="text-lg sm:text-md font-bold mb-3 sm:mb-4">Actions</h2>
+    <>
+    <div className="xs:w-3/4 md:w-full max-h-[40vh] overflow-y-auto p-3 bg-gray-50 shadow-md rounded-lg">
+      <h2 className="text-md font-bold mb-4 text-gray-800">Actions</h2>
 
-      <button className="w-full py-1.5 sm:py-2 px-3 sm:px-4 bg-green-600 text-sm sm:text-base text-white rounded hover:bg-green-700">
-        Export Data
+      {/* Go to Editor */}
+      <button className="w-full cursor-pointer flex items-center justify-start gap-2 py-2 px-3 text-sm text-white bg-green-600 rounded-md hover:bg-green-700 transition mb-3">
+        <FileEdit size={18} />
+        Go to Editor
       </button>
 
-      <button className="w-full mt-2 py-1.5 sm:py-2 px-3 sm:px-4 border border-green-700 text-sm sm:text-base rounded hover:bg-grey-20">
+      {/* Export Data */}
+     <ExportData />
+
+      {/* Divider Line */}
+      <hr className="my-3 border-t border-gray-300" />
+
+      {/* Settings */}
+      <button className="w-full flex items-center justify-start gap-2 py-2 px-3 text-sm text-green-700 border border-green-700 rounded-md hover:bg-gray-100 transition mb-3">
+        <Settings size={18} />
         Settings
       </button>
+
+      {/* Share */}
+      <button className="w-full flex items-center justify-start gap-2 py-2 px-3 text-sm text-green-700 border border-green-700 rounded-md hover:bg-gray-100 transition">
+        <Share2 size={18} />
+        Share
+      </button>
     </div>
+    </>
   );
 };
 

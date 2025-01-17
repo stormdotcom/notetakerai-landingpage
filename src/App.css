@@ -1,0 +1,25 @@
+/* Scrollbar Track (Background) */
+::-webkit-scrollbar {
+  width: 6px;  /* Slightly thinner for a modern look */
+  height: 6px;
+  background-color: #f9fafb; /* Light Gray (Tailwind's gray-50) */
+}
+
+/* Scrollbar Thumb (Draggable part) */
+*::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; /* Tailwind's gray-300 */
+  border-radius: 10px;
+  border: 2px solid #f9fafb; /* Creates a subtle gap effect */
+  -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: background-color 0.3s ease;
+}
+
+/* Scrollbar Thumb on Hover */
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8; /* Tailwind's gray-400 for hover effect */
+}
+
+/* Scrollbar Corner (for both axes) */
+::-webkit-scrollbar-corner {
+  background-color: #f9fafb; /* Match with the background */
+}
