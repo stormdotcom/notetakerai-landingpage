@@ -1,4 +1,3 @@
-import HomeDashboard from "./modules/home/components/HomeDashboard";
 
 const routes = [
   {
@@ -13,3 +12,4 @@ const routes = [
   },
 ];
 export { routes };
+
