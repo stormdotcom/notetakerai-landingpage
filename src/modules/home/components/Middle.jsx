@@ -67,7 +67,7 @@ const Middle = ({ loading = false,  }) => {
     <div className="max-h-[90vh] overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 rounded-lg min-w-full">
       <h2 className="sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-800"> 
       <Chrome className="w-5 h-5 text-gray-800 mr-2" color="#3e9392" />
-
+        Title Of session
       </h2>
 
       {loading
