@@ -15,7 +15,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     // Add auth token to headers if available
-    const token = localStorage.getItem("token");
+    const token = import.meta.env.ACCESS_TOKEN //localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
