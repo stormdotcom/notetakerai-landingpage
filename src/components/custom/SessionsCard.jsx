@@ -8,23 +8,22 @@ import {
 import { useSession } from "@/context/SessionContext";
 import _ from "lodash";
 import { Clock2, FileText, Mic } from "lucide-react";
-import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 const SessionsCard = ({ loading = false }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { sessions, setCurrent } = useSession();
 
-  useEffect(() => {
-    if (!_.isEmpty(sessions)) {
-      // const latestSession = _.keys(sessions)[0];
-      // if (latestSession) {
-      //   navigate(`/dashboard/${latestSession}`);
-      // }
-      setCurrent(_.values(sessions)[0])
-    }
-  }, [sessions, navigate]);
-  const handleSession = (data) => {
+  // useEffect(() => {
+  //   if (!_.isEmpty(sessions)) {
+  //     const latestSession = _.keys(sessions)[0];
+  //     if (latestSession) {
+  //       navigate(`/dashboard/${latestSession}`);
+  //     }
+  //   }
+  // }, [sessions, navigate]);
+  const handleSession = (data, sessionKey) => {
+    navigate(`/dashboard/${sessionKey}`);
     setCurrent(data)
   }
   // Skeleton loader for loading state
@@ -57,13 +56,14 @@ const SessionsCard = ({ loading = false }) => {
               return (
                 <li
                   key={sessionKey}
-                  className={`p-2 sm:p-3 rounded-lg shadow-sm border ${
+                  onClick={()=>handleSession(sessionData, sessionKey)}
+                  className={`p-2 sm:p-3 rounded-lg shadow-sm border cursor-pointer ${
                     location.pathname === `/dashboard/${sessionKey}`
-                      ? "border-purple-500 bg-purple-50"
-                      : "border-gray-300"
+                      ? "bg-green-50 border-l-4 border-green-500"
+                      : "border-gray-400"
                   }`}
                 >
-                  <div className="flex items-center hover:bg-gray-100 rounded-lg cursor-pointer" onClick={()=>handleSession(sessionData)}>
+                  <div className="flex items-center rounded-lg">
                     <Mic className="w-5 h-5 text-gray-800 mr-2" />
                     <div className="flex flex-col flex-grow truncate">
                     <TooltipProvider>

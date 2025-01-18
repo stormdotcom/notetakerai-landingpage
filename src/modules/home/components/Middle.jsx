@@ -2,12 +2,13 @@
 import { useSession } from "@/context/SessionContext";
 import { Chrome, Pause, Play } from "lucide-react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { renderSkeleton } from "./Skelton/MiddleSkelton";
 
 const Middle = ({ loading = false,  }) => {
-  // const { sessionId } = useParams();
-    const {  getSessionById, currentSession } = useSession();
-    const summaries = currentSession;
+  const { sessionId } = useParams();
+    const {  getSessionById, sessions } = useSession();
+    const summaries = getSessionById(sessionId);
 
   // Function to handle text-to-speech
   const [text, setText] = useState('');
@@ -65,10 +66,13 @@ const Middle = ({ loading = false,  }) => {
 
   return (
     <div className="max-h-[90vh] overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 rounded-lg min-w-full">
-      <h2 className="sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-800"> 
-      <Chrome className="w-5 h-5 text-gray-800 mr-2" color="#3e9392" />
+      <div className="flex">
+      <Chrome className="w-5 h-5 text-gray-800 m-2" color="#3e9392" />
+      <h6 className="sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-800"> 
+     
         Title Of session
-      </h2>
+      </h6>
+      </div>
 
       {loading
         ? renderSkeleton()
@@ -97,12 +101,12 @@ const Middle = ({ loading = false,  }) => {
               {/* Bottom Playback Button */}
              <div className="flex"> 
              <div className="mt-2 sm:mt-3 flex items-center space-x-1 sm:space-x-2">
-                <button onClick={()=> pauseSpeech()} className="p-1 sm:p-1.5 rounded-full hover:bg-purple-100">
+                <button onClick={()=> pauseSpeech()} className="p-1 sm:p-1.5 rounded-full hover:bg-green-100">
                   <Pause size={14}  />
                 </button>
               </div>
               <div className="mt-2 sm:mt-3 flex items-center space-x-1 sm:space-x-2">
-                <button onClick={()=>speakText(item.summary)} className="p-1 sm:p-1.5 rounded-full hover:bg-purple-100">
+                <button onClick={()=>speakText(item.summary)} className="p-1 sm:p-1.5 rounded-full hover:bg-green-100">
                   <Play size={14}   />
                 </button>
               </div>

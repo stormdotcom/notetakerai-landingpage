@@ -1,5 +1,6 @@
 import ExportData from '@/components/custom/Modal/ExportData';
-import { FileEdit, Settings, Share2 } from 'lucide-react';
+import ShareContent from '@/components/custom/Modal/ShareData';
+import { FileEdit, Settings } from 'lucide-react';
 
 const RightSidebar = () => {
   return (
@@ -24,12 +25,7 @@ const RightSidebar = () => {
         <Settings size={18} />
         Settings
       </button>
-
-      {/* Share */}
-      <button className="w-full flex items-center justify-start gap-2 py-2 px-3 text-sm text-green-700 border border-green-700 rounded-md hover:bg-gray-100 transition">
-        <Share2 size={18} />
-        Share
-      </button>
+      <ShareContent />
     </div>
     </>
   );

@@ -13,15 +13,15 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64 bg-gray-900 text-white p-4">
-      <h2 className="text-lg font-semibold mb-4">Sections</h2>
+      <h2 className="text-md font-semibold mb-4">Sections</h2>
       <ul>
         {sections.map((section, index) => (
-          <li key={index} className="mb-2">
+          <li key={index} className="mb-2  hover:bg-slate-600">
             <Link
               to={section.path}
-              className={`block px-3 py-2 rounded ${
+              className={`block px-3 py-2 rounded${
                 location.pathname === section.path
-                  ? "bg-purple-600"
+                  ? "bg-green-600"
                   : "hover:bg-gray-700"
               }`}
             >

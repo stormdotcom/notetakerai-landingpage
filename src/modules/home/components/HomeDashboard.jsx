@@ -2,7 +2,7 @@ import { getRequest } from "@/app/service";
 import SummaryCard from "@/components/custom/SessionsCard";
 import { useSession } from "@/context/SessionContext";
 import { useEffect, useState } from "react";
-import Middle from "./Middle";
+import { Outlet } from "react-router-dom";
 import RightSidebar from "./RightSide";
 import { renderSkeleton } from "./Skelton/MiddleSkelton";
 
@@ -36,7 +36,9 @@ const HomeDashboard = () => {
 
   {/* Middle Content */}
   <div className="lg:col-span-3 p-1 sm:p-2 bg-white overflow-y-auto">
-    {loading ? renderSkeleton() : <Middle />}
+
+    {loading && renderSkeleton()}
+    <Outlet />
   </div>
 
   {/* Right Sidebar */}
