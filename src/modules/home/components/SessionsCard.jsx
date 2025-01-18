@@ -6,6 +6,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useSession } from "@/context/SessionContext";
+import { generateSummaryMeta } from "@/lib/summaryUtils";
 import _ from "lodash";
 import { Clock2, FileText, Mic } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -45,14 +46,14 @@ const SessionsCard = ({ loading = false }) => {
   };
 
   return (
-    <aside className="h-[90vh] xl:w-100 lg:w-65 md:w-59 sm:w-48 xs:w-48 bg-gray-100 p-2 sm:p-1 rounded-lg shadow-md overflow-y-auto">
-      <h2 className="text-md sm:text-lg font-semibold mb-3 sm:mb-4">Sessions</h2>
+    <aside className="h-[90vh] xl:w-100 lg:w-65 md:w-59 sm:w-48 xs:w-48 bg-gray-100 p-3 sm:p-1 rounded-lg border border-gray-100 shadow-md overflow-y-auto">
+      <h6 className="text-sm sm:text-sm font-semibold mb-3 sm:mb-4 ml-2 text-gray-500">Sessions</h6>
       <ul className="space-y-2">
         {loading
           ? renderSkeleton()
           : _.map(sessions, (sessionData, sessionKey) => {
-              const { startDate = "", durationMinutes = 0, totalSummary = "-" } = sessionData;
-
+              const { startDate = "", durationMinutes = 0, totalSummary = "-" } = generateSummaryMeta(sessionData);
+           
               return (
                 <li
                   key={sessionKey}

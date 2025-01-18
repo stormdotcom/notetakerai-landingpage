@@ -1,6 +1,6 @@
 import { getRequest } from "@/app/service";
-import SummaryCard from "@/components/custom/SessionsCard";
 import { useSession } from "@/context/SessionContext";
+import SummaryCard from "@/modules/home/components/SessionsCard";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import RightSidebar from "./RightSide";

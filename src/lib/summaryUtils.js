@@ -1,23 +1,31 @@
 import _ from 'lodash';
 
-export const generateMeta = (data) => {
-  
-  return _.map(data, (entries,) => {
-    if (!entries.length) return {};
+export const generateSummaryMeta = (data) => {
+  if (_.isEmpty(data)) return {};  // Safeguard for empty data
 
-    // Sort entries by timestamp
-    const sortedEntries = _.sortBy(entries, 'timestamp');
-    
-    const startDate = new Date(sortedEntries[0].timestamp);
-    const endDate = new Date(sortedEntries[sortedEntries.length - 1].timestamp);
-    
-    const durationMinutes = Math.round((endDate - startDate) / (1000 * 60));
+  const sortedEntries = _.sortBy(_.flattenDeep(data), (entry) => new Date(entry.timestamp));
 
-    return {
-      startDate,
-      endDate,
-      durationMinutes,
-      totalSummary: value.length
-    };
-  });
+  // Handle empty or invalid data
+  if (_.isEmpty(sortedEntries)) return {
+    startDate: "",
+    endDate: "",
+    durationMinutes: 0,
+    totalSummary: "-"
+  };
+
+  // Extract start and end timestamps
+  const startDate = sortedEntries[0].timestamp;
+  const endDate = sortedEntries[sortedEntries.length - 1].timestamp;
+
+  // Calculate duration in minutes
+  const durationMinutes = Math.round(
+    (new Date(endDate) - new Date(startDate)) / (1000 * 60)
+  );
+
+  return {
+    startDate,
+    endDate,
+    durationMinutes,
+    totalSummary: sortedEntries.length  // Total number of entries
+  };
 };
