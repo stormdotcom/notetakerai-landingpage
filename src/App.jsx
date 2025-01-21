@@ -5,6 +5,7 @@ import { SessionProvider } from "./context/SessionContext";
 import DashboardLayout from "./layouts/DashboardLayout";
 import HomeDashboard from "./modules/home/components/HomeDashboard";
 import Middle from "./modules/home/components/Middle";
+import UserHome from "./modules/home/components/UserHome";
 import HomeLayout from "./page/HomeLayout";
 import LandingPage from "./page/landing/LandingPage";
 import PrivacyPolicy from "./page/privacy/PrivacyPolicy";
@@ -24,7 +25,8 @@ function App() {
         {/* 🔒 Dashboard Routes with DashboardLayout */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route  element={<HomeDashboard />} >
-          <Route path=":sessionId" element={<Middle />} />
+          <Route path="home" element={<UserHome />} />
+          <Route path="session/:sessionId" element={<Middle />} />
           </Route>
           
           <Route path="*" element={<h1>404 - Dashboard Page Not Found</h1>} />

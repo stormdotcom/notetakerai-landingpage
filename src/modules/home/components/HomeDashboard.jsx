@@ -1,15 +1,14 @@
 import { getRequest } from "@/app/service";
-import { useSession } from "@/context/SessionContext";
 import SummaryCard from "@/modules/home/components/SessionsCard";
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import RightSidebar from "./RightSide";
 import { renderSkeleton } from "./Skelton/MiddleSkelton";
 
 const HomeDashboard = () => {
   const [summaries, setSummary] = useState([]);
   const [loading, setLoading] = useState(true);
-      const {  updateSessions } = useSession();
+      const {  sessionId } = useParams();
   // Fetch data on mount
   useEffect(() => {
     fetchSummary();
@@ -17,7 +16,7 @@ const HomeDashboard = () => {
 
   const fetchSummary = async () => {
     try {
-      const result = await getRequest("/summary");
+      const result = await getRequest(`/session/${sessionId}`);
       setSummary(result.data);
       updateSessions(result.data)
     } catch (error) {
