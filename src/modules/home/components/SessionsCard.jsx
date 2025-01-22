@@ -72,7 +72,7 @@ const SessionsCard = ({ loading = false }) => {
                                     <h3 className="text-sm font-medium text-gray-800 truncate">{session.tabInfo.title}</h3>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                    {idx}
+                                    {session.tabInfo.title}
                                     </TooltipContent>
                                   </Tooltip>
                                 </TooltipProvider>
