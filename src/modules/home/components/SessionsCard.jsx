@@ -6,14 +6,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useSession } from "@/context/SessionContext";
-import { generateSummaryMeta } from "@/lib/summaryUtils";
 import _ from "lodash";
 import { Clock2, FileText, Mic } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 const SessionsCard = ({ loading = false }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { sessions, setCurrent } = useSession();
+  const { sessions = []} = useSession()
 
   // useEffect(() => {
   //   if (!_.isEmpty(sessions)) {
@@ -23,8 +22,8 @@ const SessionsCard = ({ loading = false }) => {
   //     }
   //   }
   // }, [sessions, navigate]);
-  const handleSession = (data, sessionKey) => {
-    navigate(`/dashboard/${sessionKey}`);
+  const handleSession = (sessionKey) => {
+    navigate(`/dashboard/session${sessionKey}`);
     setCurrent(data)
   }
   // Skeleton loader for loading state
@@ -51,29 +50,29 @@ const SessionsCard = ({ loading = false }) => {
       <ul className="space-y-2">
         {loading
           ? renderSkeleton()
-          : _.map(sessions, (sessionData, sessionKey) => {
-              const { startDate = "", durationMinutes = 0, totalSummary = "-" } = generateSummaryMeta(sessionData);
+          : _.map(sessions, (session, idx) => {
+              const { startDate = "", durationMinutes = 0, totalSummary = "-" } = {durationMinutes:1, totalSummary:1}
            
               return (
                 <li
-                  key={sessionKey}
-                  onClick={()=>handleSession(sessionData, sessionKey)}
+                  key={idx}
+                  onClick={()=>handleSession(sessions)}
                   className={`p-2 sm:p-3 rounded-lg shadow-sm border cursor-pointer ${
-                    location.pathname === `/dashboard/${sessionKey}`
+                    location.pathname === `/dashboard/session/${session.sessionId}`
                       ? "bg-green-50 border-l-4 border-green-500"
                       : "border-gray-400"
                   }`}
                 >
                   <div className="flex items-center rounded-lg">
-                    <Mic className="w-5 h-5 text-gray-800 mr-2" />
+                    <Mic className="w-7 h-7 text-gray-800 mr-2" />
                     <div className="flex flex-col flex-grow truncate">
                     <TooltipProvider>
                                   <Tooltip>
                                     <TooltipTrigger>
-                                    <h3 className="text-sm font-medium text-gray-800 truncate">{sessionKey}</h3>
+                                    <h3 className="text-sm font-medium text-gray-800 truncate">{session.tabInfo.title}</h3>
                                     </TooltipTrigger>
                                     <TooltipContent>
-                                    {sessionKey}
+                                    {idx}
                                     </TooltipContent>
                                   </Tooltip>
                                 </TooltipProvider>

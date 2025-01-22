@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { SessionProvider } from "./context/SessionContext";
 import DashboardLayout from "./layouts/DashboardLayout";
-import HomeDashboard from "./modules/home/components/HomeDashboard";
+import SessionDashboard from "./modules/home/components/HomeDashboard";
 import Middle from "./modules/home/components/Middle";
 import UserHome from "./modules/home/components/UserHome";
 import HomeLayout from "./page/HomeLayout";
@@ -24,11 +24,11 @@ function App() {
 
         {/* 🔒 Dashboard Routes with DashboardLayout */}
         <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route  element={<HomeDashboard />} >
-          <Route path="home" element={<UserHome />} />
-          <Route path="session/:sessionId" element={<Middle />} />
+          <Route index element={<UserHome />} />
+          <Route path="session/:sessionId" element={<SessionDashboard />}>
+            {/* Nested routes for SessionDashboard */}  
+            <Route index element={<Middle />} /> {/* Default route for session */}
           </Route>
-          
           <Route path="*" element={<h1>404 - Dashboard Page Not Found</h1>} />
         </Route>
       </Routes>

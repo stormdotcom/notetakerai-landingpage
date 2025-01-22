@@ -1,42 +1,19 @@
+import { getRequest } from "@/app/service";
 import { format } from "date-fns"; // For date formatting
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const recordings = [
-    {
-      browserInfo: {
-        browserName: "Chrome",
-        userAgent:
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-      },
-      tabInfo: {
-        title:
-          "Archive | HLD - overflow topics - Messaging + LSM trees | Scaler Academy",
-        url: "https://www.scaler.com/meetings/i/hld-microservices-90/archive",
-        favIconUrl:
-          "https://assets-v2.scaler.com/assets/scaler/favicon-b8be73bbdaf99603448b08956392cad1e0f2d4e0c84661b1cfc20225e9fb6a40.ico.gz",
-      },
-      _id: "678fa7fa843e652f78719824",
-      sessionId: "guest-guest-1737467898160",
-      userId: "1",
-      status: "active",
-      createdAt: "2025-01-21T13:58:18.177Z",
-      updatedAt: "2025-01-21T13:58:18.177Z",
-    },
-    // Add more items as needed
-  ];
 
   const UserHome = () => {
-    const [summaries, setSummary] = useState([]);
+    const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-
+  
     const fetchSummary = async () => {
       try {
-        // Mock data fetching
-        const result = { data: recordings }; // Replace with your API call
-        setSummary(result.data);
+        const result = await getRequest(`/session/all`);
+        setSessions(result.data);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       } finally {
@@ -66,7 +43,7 @@ const recordings = [
   
           {loading ? (
             <p className="text-center text-gray-500">Loading...</p>
-          ) : summaries.length === 0 ? (
+          ) : sessions.length === 0 ? (
             <p className="text-center text-gray-500">No records found.</p>
           ) : (
             <div className="overflow-x-auto">
@@ -80,7 +57,7 @@ const recordings = [
                   </tr>
                 </thead>
                 <tbody>
-                  {summaries.map((record) => (
+                  {sessions .map((record) => (
                     <tr
                       key={record._id}
                       className="hover:bg-gray-50 transition-colors"
@@ -105,7 +82,7 @@ const recordings = [
                         {format(new Date(record.createdAt), "MMM dd, yyyy")}
                       </td>
                       <td className="py-2 px-4 text-right">
-                        <button className="text-xs text-blue-500 hover:underline" onClick={()=> navigate(`../session/${record.sessionId}`)}> 
+                        <button className="text-xs text-blue-500 hover:underline" onClick={()=> navigate(`../dashboard/session/${record.sessionId}`)}> 
                           View
                         </button>
                         <button className="text-xs text-red-500 hover:underline ml-4">

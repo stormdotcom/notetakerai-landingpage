@@ -5,9 +5,9 @@ const SessionContext = createContext();
 
 // Context Provider
 export const SessionProvider = ({ children }) => {
-  const [sessions, setSessions] = useState({});
+  const [sessions, setSessions] = useState([ {}]);
   const [currentSession, setCurrentSession] = useState([]);
-
+  
   // Function to update sessions
   const updateSessions = (newSessions) => {
     setSessions(newSessions);
