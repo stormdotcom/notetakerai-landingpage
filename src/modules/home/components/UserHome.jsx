@@ -3,6 +3,7 @@ import { format } from "date-fns"; // For date formatting
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ToolsSections from "./ToolsSections";
 
 
   const UserHome = () => {
@@ -36,6 +37,7 @@ import { useNavigate } from "react-router-dom";
             Plato: Thinking, the talking of the soul with itself.
           </p>
         </div>
+        <ToolsSections />
   
         {/* Recordings Table */}
         <div className="bg-white shadow-md rounded-lg p-6">
