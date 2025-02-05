@@ -5,7 +5,7 @@ const DashboardHeader = () => {
   return (
     <header className="flex justify-between items-center  p-4 shadow-md">
       {/* Logo */}
-      <h1 className="text-xl font-bold">🚀 Quick Note AI</h1>
+      <h1 className="text-xl font-bold">🚀 QNotes AI</h1>
 
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">

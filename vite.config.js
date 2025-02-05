@@ -1,10 +1,10 @@
+import react from "@vitejs/plugin-react"
 import path from "path"
 import { fileURLToPath } from "url"
+import { defineConfig } from "vite"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,4 +14,16 @@ export default defineConfig({
      "@": path.resolve(__dirname, "./src"),
    },
  },
+ build: {
+  target: "esnext",
+  outDir: "dist",  
+  sourcemap: true, 
+  rollupOptions: {
+    output: {
+      manualChunks: {
+        vendor: ["react", "react-dom"],
+      },
+    },
+  },
+},
 })
