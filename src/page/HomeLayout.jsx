@@ -24,7 +24,7 @@ const HomeLayout = () => {
       {/* Footer */}
       <footer className="bg-white shadow-inner py-3 text-center text-sm">
         <p>
-          © {new Date().getFullYear()} QuickNote AI. Made with ❤️ by{" "}
+          © {new Date().getFullYear()} QNotes AI. Made with ❤️ by{" "}
           <a
             href="https://ajmalnasumudeen.in/"
             target="_blank"
