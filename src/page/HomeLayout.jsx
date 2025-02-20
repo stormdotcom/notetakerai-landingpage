@@ -13,7 +13,7 @@ const HomeLayout = () => {
           <img src={Logo} alt="Logo" className="w-10 h-10 cursor-pointer" />
         </div>
 
-        <h1 className="text-2xl font-bold text-green-600">QuickNote AI</h1>
+        <h1 className="text-2xl font-bold text-green-600">QNotes AI</h1>
       </header>
 
       {/* Main Content with Smooth GIF Rotation */}
