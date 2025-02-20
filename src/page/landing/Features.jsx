@@ -1,10 +1,10 @@
 import {
-    faChartLine,
-    faCheckCircle,
-    faClipboardList,
-    faFileAlt,
-    faGlobe,
-    faShareAlt,
+  faChartLine,
+  faCheckCircle,
+  faClipboardList,
+  faFileAlt,
+  faGlobe,
+  faShareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -36,10 +36,11 @@ const Features = () => {
       icon: <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 text-4xl" />,
     },
     {
-      title: "Email & Sharing",
-      description: "Easily share meeting notes and action points with your team in one click.",
-      icon: <FontAwesomeIcon icon={faShareAlt} className="text-green-500 text-4xl" />,
+      title: "Seamless Sharing",
+      description: "Easily share meeting notes via email or download them as a file.",
+      icon: <FontAwesomeIcon icon={faShareAlt} className="text-green-400 text-4xl" />,
     },
+    
   ];
 
   return (

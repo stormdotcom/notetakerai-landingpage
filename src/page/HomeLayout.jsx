@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Outlet, useNavigate } from "react-router-dom";
+import HomeFooter from "./HomeFooter";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
@@ -30,33 +31,10 @@ const HomeLayout = () => {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="relative flex-grow flex items-center justify-center">
         <Outlet />
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white shadow-inner py-3 text-center text-sm">
-        <p>
-          © {new Date().getFullYear()} QNotes AI. Made with ❤️ by{" "}
-          <a
-            href="https://ajmalnasumudeen.in/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ajmal Nasumudeen
-          </a>
-          .
-        </p>
-        <a
-          className="text-blue-500 mt-2 cursor-pointer"
-          onClick={() => navigate("/privacy-policy")}
-          rel="noopener noreferrer"
-        >
-          Privacy Policy
-        </a>
-        .
-      </footer>
+      <HomeFooter />
     </div>
   );
 };

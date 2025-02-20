@@ -18,28 +18,21 @@ function App() {
       <AudioProvider> 
       <HashRouter>
         <Routes>
-          {/* 🌐 Public Routes with HomePageLayout */}
           <Route path="/" element={<HomeLayout />}>
             <Route index element={<LandingPage />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Route>
-
-          {/* 🔒 Dashboard Routes with DashboardLayout */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<UserHome />} />
             <Route path="session/:sessionId" element={<SessionDashboard />}>
               <Route index element={<Middle />} />
             </Route>
-
-            {/* 🎤 Audio Record Route */}
             <Route
               path="audio/record/:sessionId"
               element={<TranscriptionInterface />}
             />
           </Route>
-
-          {/* Fallback Route */}
           <Route path="*" element={<h1>404 - Page Not Found</h1>} />
         </Routes>
       </HashRouter>
