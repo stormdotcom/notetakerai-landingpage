@@ -8,13 +8,11 @@ const HomeLayout = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 text-gray-800">
-      {/* Header */}
       <header className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
         <div className="flex items-center cursor-pointer" onClick={handleHome}>
           <h1 className="text-2xl font-bold text-green-600">QNotes AI</h1>
         </div>
 
-        {/* Login and Subscription Buttons */}
         <div className="flex items-center space-x-4">
           <button
             className="text-gray-800 hover:text-gray-600 font-medium"
