@@ -5,7 +5,7 @@ const HomeFooter = () => {
 
   return (
     <footer className="bg-gray-900 text-white py-6 text-center border-t border-gray-500 shadow-lg">
-      <p className="mb-2">
+      <p className="mb-2 text-sm">
         © {new Date().getFullYear()} QNotes AI. Made with ❤️ by{" "}
         <a
           href="https://ajmalnasumudeen.in/"
