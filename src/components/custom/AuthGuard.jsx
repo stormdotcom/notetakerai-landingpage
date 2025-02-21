@@ -1,3 +1,4 @@
+import { STORAGE_KEYS } from "@/modules/home/constant";
 import { Navigate, Outlet } from "react-router-dom";
 
 /**
@@ -5,7 +6,7 @@ import { Navigate, Outlet } from "react-router-dom";
  * Redirects to login if no token is found.
  */
 export const PrivateRoute = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE);
 
   return token ? <Outlet /> : <Navigate to="/login" replace />;
 };
@@ -15,7 +16,7 @@ export const PrivateRoute = () => {
  * Redirects to /dashboard if already logged in.
  */
 export const PublicRoute = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE);
 
   return token ? <Navigate to="/dashboard" replace /> : <Outlet />;
 };

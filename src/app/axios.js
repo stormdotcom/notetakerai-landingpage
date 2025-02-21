@@ -1,17 +1,17 @@
-import { HEADERS } from "@/modules/home/constant";
+import { HEADERS, STORAGE_KEYS } from "@/modules/home/constant";
 import axios from "axios";
 
 // Create Axios instance
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL, // Base URL from .env
-  timeout: 30000, // Request timeout
+  baseURL: import.meta.env.VITE_BASE_URL,
+  timeout: 30000,
   headers: HEADERS
 });
 
-// Request Interceptor - Attach Token
+
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // Get token from localStorage
+    const token = localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

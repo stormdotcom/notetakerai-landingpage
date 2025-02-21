@@ -4,6 +4,7 @@ import { faSignOutAlt, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Bell } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DashboardHeader = () => {
   const { user, logout } = useUser();
@@ -19,10 +20,17 @@ const DashboardHeader = () => {
     logout();
     setIsUserMenuOpen(false);
   };
+  const navigate = useNavigate();
 
   return (
     <header className="flex justify-between items-center p-4 shadow-md bg-white">
-      <h1 className="text-xl font-bold">🚀 QNotes AI</h1>
+      <h1
+        className="text-2xl font-bold text-green-600 cursor-pointer"
+        onClick={() => navigate("/dashboard")}
+      >
+        {" "}
+        QNotes AI
+      </h1>
 
       <div className="flex items-center space-x-4">
         <Button

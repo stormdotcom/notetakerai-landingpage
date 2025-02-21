@@ -1,6 +1,8 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 
+import { ToastContainer } from "react-toastify";
 import "./App.css";
+
 import { PrivateRoute, PublicRoute } from "./components/custom/AuthGuard";
 import { AudioProvider } from "./context/AudioContext";
 import { SessionProvider } from "./context/SessionContext";
@@ -52,6 +54,7 @@ function App() {
               </Route>
               <Route path="*" element={<ErrorPage />} />
             </Routes>
+            <ToastContainer />
           </AudioProvider>
         </SessionProvider>
       </UserProvider>

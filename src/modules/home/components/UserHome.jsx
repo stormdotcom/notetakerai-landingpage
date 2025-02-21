@@ -1,6 +1,7 @@
 import { getRequest } from "@/app/service";
 import { format } from "date-fns"; // For date formatting
 
+import { handleResponseError } from "@/utils/errorHandler";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RandomQuoteGenerator from "./RandomQuoteGenerator";
@@ -13,10 +14,10 @@ const UserHome = () => {
 
   const fetchSummary = async () => {
     try {
-      const result = await getRequest(`/session/all`);
+      const result = await getRequest(`/v1/session/all`);
       setSessions(result.data);
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      await handleResponseError(error);
     } finally {
       setLoading(false);
     }

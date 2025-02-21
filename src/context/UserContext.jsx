@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 import apiClient from "@/app/axios";
+import { signInWithGoogle } from "@/config/firebase";
 import { STORAGE_KEYS } from "@/modules/home/constant";
+import { handleResponseError } from "@/utils/errorHandler";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Importing toast from React-Toastify
+import "react-toastify/dist/ReactToastify.css"; // Importing the default CSS for toast
 
 const UserContext = createContext();
 
@@ -33,14 +37,15 @@ export const UserProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (provider) => {
     setLoading(true);
     setError(null);
 
     try {
+      const idToken = await signInWithGoogle();
       const response = await apiClient.post("/auth/social-login", {
-        email,
-        password,
+        idToken,
+        provider,
       });
 
       if (response.data.token) {
@@ -51,27 +56,29 @@ export const UserProvider = ({ children }) => {
         );
         setToken(response.data.token);
         setUser(response.data.user);
-        return { success: true, user: response.data.user };
+        navigate("/dashboard");
       } else {
         throw new Error("Login failed");
       }
     } catch (err) {
-      setError(err.response?.data?.error || "Login failed");
-      return { success: false, error: err.response?.data?.error };
+      const errorMessage = err.response?.data?.error || "Login failed";
+      setError(errorMessage);
+      await handleResponseError(error);
+      return { success: false, error: errorMessage };
     } finally {
       setLoading(false);
     }
   };
 
-  const register = async (name, email, password) => {
+  const register = async (provider) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await apiClient.post("/auth/social-register", {
-        name,
-        email,
-        password,
+      const idToken = await signInWithGoogle();
+      const response = await apiClient.post("/auth/social-login", {
+        idToken,
+        provider,
       });
 
       if (response.data.token) {
@@ -82,13 +89,15 @@ export const UserProvider = ({ children }) => {
         );
         setToken(response.data.token);
         setUser(response.data.user);
-        return { success: true, user: response.data.user };
+        navigate("/dashboard");
       } else {
         throw new Error("Registration failed");
       }
     } catch (err) {
-      setError(err.response?.data?.error || "Registration failed");
-      return { success: false, error: err.response?.data?.error };
+      const errorMessage = err.response?.data?.error || "Registration failed";
+      setError(errorMessage);
+      await handleResponseError(err);
+      return { success: false, error: errorMessage };
     } finally {
       setLoading(false);
     }
@@ -99,6 +108,9 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem(STORAGE_KEYS.USER);
     setToken(null);
     setUser(null);
+    navigate("/");
+
+    toast.info("Logged out successfully");
   };
 
   return (

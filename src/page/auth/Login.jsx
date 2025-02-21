@@ -1,5 +1,4 @@
-import { signInWithGoogle } from "@/config/firebase";
-import { STORAGE_KEYS } from "@/modules/home/constant";
+import { useUser } from "@/context/UserContext";
 import {
   faGithub,
   faGoogle,
@@ -15,30 +14,14 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { login } = useUser();
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Logging in with:", { email, password });
     navigate("/dashboard");
   };
 
   const handleOAuthLogin = async (provider) => {
-    const idToken = await signInWithGoogle();
-    console.log({ idToken });
-    if (idToken) {
-      const response = await fetch("http://localhost:8000/auth/social-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken, provider }),
-      });
-
-      const data = await response.json();
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data.user));
-        navigate("/dashboard");
-      }
-    }
+    await login(provider);
   };
 
   return (
