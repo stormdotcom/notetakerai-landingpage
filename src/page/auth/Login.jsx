@@ -1,3 +1,5 @@
+import { signInWithGoogle } from "@/config/firebase";
+import { STORAGE_KEYS } from "@/modules/home/constant";
 import {
   faGithub,
   faGoogle,
@@ -20,8 +22,23 @@ const Login = () => {
     navigate("/dashboard");
   };
 
-  const handleOAuthLogin = (provider) => {
-    console.log(`Logging in with ${provider}`);
+  const handleOAuthLogin = async (provider) => {
+    const idToken = await signInWithGoogle();
+    console.log({ idToken });
+    if (idToken) {
+      const response = await fetch("http://localhost:8000/auth/social-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, provider }),
+      });
+
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data.user));
+        navigate("/dashboard");
+      }
+    }
   };
 
   return (

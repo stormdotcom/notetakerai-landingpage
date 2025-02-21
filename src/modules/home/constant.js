@@ -7,3 +7,16 @@ export const summaries = [
   { id: 6, title: "Section 6", description: "This mission marks..." },
   { id: 7, title: "Section 7", description: "Stay tuned for updates..." },
 ];
+
+
+
+export const STORAGE_KEYS = {
+  LOCAL_STORAGE: "access_token",
+  USER: "user"
+}
+
+
+export const HEADERS = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+}

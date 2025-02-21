@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useRef, useState } from "react";
 
 // Create Context
@@ -37,7 +39,10 @@ export const AudioProvider = ({ children }) => {
 
   // Function to stop the MediaRecorder
   const stopMediaRecorder = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state === "recording"
+    ) {
       mediaRecorderRef.current.stop();
       if (mediaStream) {
         mediaStream.getTracks().forEach((track) => track.stop());

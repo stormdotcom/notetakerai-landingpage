@@ -1,21 +1,17 @@
+import { HEADERS } from "@/modules/home/constant";
 import axios from "axios";
 
 // Create Axios instance
 const apiClient = axios.create({
-  // eslint-disable-next-line no-undef
-  baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 30000, // Request timeout (10 seconds)
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
+  baseURL: import.meta.env.VITE_BASE_URL, // Base URL from .env
+  timeout: 30000, // Request timeout
+  headers: HEADERS
 });
 
-// Request Interceptor
+// Request Interceptor - Attach Token
 apiClient.interceptors.request.use(
   (config) => {
-    // Add auth token to headers if available
-    const token = import.meta.env.ACCESS_TOKEN //localStorage.getItem("token");
+    const token = localStorage.getItem("token"); // Get token from localStorage
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,11 +20,10 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor
+// Response Interceptor - Global Error Handling
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Global error handling
     if (error.response) {
       console.error(
         "API Error:",
