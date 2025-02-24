@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   // Texts to animate
@@ -12,6 +13,7 @@ const HeroSection = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100;
@@ -53,7 +55,10 @@ const HeroSection = () => {
         </p>
 
         <div className="mt-6">
-          <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300">
+          <button
+            onClick={() => navigate("./dashboard")}
+            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300"
+          >
             Get Started 🚀
           </button>
         </div>
