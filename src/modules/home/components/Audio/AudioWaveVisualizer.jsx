@@ -36,8 +36,8 @@ const AudioWaveVisualizer = () => {
       )}
 
       <p className="text-sm text-center text-gray-500">
-        Speak clearly and at a moderate speed, avoid using dialects, and avoid
-        multiple people speaking at the same time.
+        Maintain a moderate speed while speaking. Ensure clarity and avoid
+        multiple speakers for optimal results.
       </p>
     </div>
   );
