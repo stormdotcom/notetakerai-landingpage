@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 import { createAudioSession, sendInstantAudio } from "@/app/api";
+import { CONTENT_TEST } from "@/modules/home/constant";
 import { handleResponseError } from "@/utils/errorHandler";
 import { createContext, useContext, useRef, useState } from "react";
 
@@ -22,6 +23,8 @@ export const AudioProvider = ({ children }) => {
   const [passingData, setPassingData] = useState(false);
   const [sessionId, setSessionId] = useState("");
   const [realTimeTranslation, setRealTimeTranslation] = useState(false);
+  const [content, setContent] = useState(CONTENT_TEST);
+
   const initSession = async (data) => {
     setLoading(true);
     try {
@@ -32,6 +35,16 @@ export const AudioProvider = ({ children }) => {
     }
   };
 
+  const getMarkDownContent = async (data) => {
+    setLoading(true);
+    try {
+      const res = await createAudioSession(data);
+      setContent(res.data);
+      setLoading(false);
+    } catch (error) {
+      await handleResponseError(error);
+    }
+  };
   const uploadAudioChunk = async (chunks) => {
     try {
       if (!sessionId) {
@@ -143,6 +156,7 @@ export const AudioProvider = ({ children }) => {
   return (
     <AudioContext.Provider
       value={{
+        content,
         realTimeTranslation,
         setRealTimeTranslation,
         setSessionId,
@@ -160,6 +174,7 @@ export const AudioProvider = ({ children }) => {
         setLowVolumeAlert,
         language,
         setLanguage,
+        getMarkDownContent,
       }}
     >
       {children}

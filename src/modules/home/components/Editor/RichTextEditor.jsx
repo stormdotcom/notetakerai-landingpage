@@ -1,3 +1,5 @@
+import LoadingOverlay from "@/components/custom/LoadingOverlay";
+import { useAudio } from "@/context/AudioContext";
 import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
@@ -18,19 +20,10 @@ const extensions = [
 ];
 
 // 📄 Default Content
-const content = `
-<h2>Hi there,</h2>
-<p>This is a <em>basic</em> example of <strong>Tiptap</strong>.</p>
-<ul>
-  <li>• Bullet List Item</li>
-  <li>• Another Item</li>
-</ul>
-<p>Try editing this text. You can also <code>write code</code>!</p>
-<blockquote>Wow, this is great! — Someone</blockquote>
-`;
 
 // 📝 Main Editor Component
 const RichTextEditor = () => {
+  const { content = "", loading = false } = useAudio();
   return (
     <EditorWrapper>
       <EditorProvider
@@ -38,7 +31,10 @@ const RichTextEditor = () => {
         extensions={extensions}
         content={content}
       >
-        <EditorContent />
+        <LoadingOverlay active={loading} message="Fetching your content">
+          {" "}
+          <EditorContent />
+        </LoadingOverlay>
       </EditorProvider>
     </EditorWrapper>
   );
