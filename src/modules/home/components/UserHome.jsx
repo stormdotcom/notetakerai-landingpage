@@ -2,8 +2,10 @@ import { getRequest } from "@/app/service";
 import { format } from "date-fns"; // For date formatting
 
 import { handleResponseError } from "@/utils/errorHandler";
+import { Mic } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SESSIONS_MAP } from "../constant";
 import RandomQuoteGenerator from "./RandomQuoteGenerator";
 import ToolsSections from "./ToolsSections";
 
@@ -58,19 +60,37 @@ const UserHome = () => {
                     className="hover:bg-gray-50 transition-colors"
                   >
                     <td className="py-2 px-4 flex items-center gap-3">
-                      <img
-                        src={record.tabInfo.favIconUrl}
-                        alt="Favicon"
-                        className="w-3 h-3"
-                      />
-                      <a
-                        href={record.tabInfo.url}
-                        className=" hover:underline text-sm truncate w-[22vw]"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <p className="truncate"> {record.tabInfo.title}</p>
-                      </a>
+                      {record.type === "instant" ? (
+                        <Mic color={"#16a34a"} size={16} className="mr-2" />
+                      ) : (
+                        <img
+                          src={record?.tabInfo?.favIconUrl}
+                          alt="Favicon"
+                          className="w-3 h-3"
+                        />
+                      )}
+                      {record.type === "instant" ? (
+                        <a
+                          className=" hover:underline text-sm truncate w-[22vw]"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {SESSIONS_MAP[record.type]}
+                        </a>
+                      ) : (
+                        <a
+                          href={record?.tabInfo?.url}
+                          className=" hover:underline text-sm truncate w-[22vw]"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <p className="truncate">
+                            {" "}
+                            {record?.tabInfo?.title ||
+                              SESSIONS_MAP[record.type]}
+                          </p>
+                        </a>
+                      )}
                     </td>
                     <td className="py-2 px-4 text-sm text-gray-600">
                       {record.status}

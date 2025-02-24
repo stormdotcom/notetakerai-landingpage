@@ -4,21 +4,14 @@ import {
   faGoogle,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "./Views/AuthLayout";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   const { login } = useUser();
-  const handleLogin = (e) => {
-    e.preventDefault();
-    navigate("/dashboard");
-  };
 
   const handleOAuthLogin = async (provider) => {
     await login(provider);
@@ -54,46 +47,6 @@ const Login = () => {
             Continue with Twitter
           </button>
         </div>
-
-        <div className="flex items-center my-4">
-          <div className="flex-1 border-t border-gray-600"></div>
-          <p className="px-4 text-gray-400">OR</p>
-          <div className="flex-1 border-t border-gray-600"></div>
-        </div>
-
-        <form className="space-y-4" onSubmit={handleLogin}>
-          <div className="flex items-center border border-gray-600 rounded-lg px-4 py-3 bg-gray-700">
-            <FontAwesomeIcon icon={faUser} className="text-green-400 mr-3" />
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full bg-transparent outline-none text-white placeholder-gray-400"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="flex items-center border border-gray-600 rounded-lg px-4 py-3 bg-gray-700">
-            <FontAwesomeIcon icon={faLock} className="text-green-400 mr-3" />
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="w-full bg-transparent outline-none text-white placeholder-gray-400"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* Login Button */}
-          <button
-            type="submit"
-            className="w-full px-4 py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-bold transition duration-300"
-          >
-            Login
-          </button>
-        </form>
 
         <p className="text-center text-gray-400 text-sm">
           {"Don't have an account?"}{" "}

@@ -9,10 +9,11 @@ import { useSession } from "@/context/SessionContext";
 import _ from "lodash";
 import { Clock2, FileText, Mic } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { SESSIONS_MAP } from "../constant";
 const SessionsCard = ({ loading = false }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { sessions = []} = useSession()
+  const { sessions = [] } = useSession();
 
   // useEffect(() => {
   //   if (!_.isEmpty(sessions)) {
@@ -24,8 +25,7 @@ const SessionsCard = ({ loading = false }) => {
   // }, [sessions, navigate]);
   const handleSession = (sessionKey) => {
     navigate(`/dashboard/session${sessionKey}`);
-    setCurrent(data)
-  }
+  };
   // Skeleton loader for loading state
   const renderSkeleton = () => {
     return Array.from({ length: 5 }).map((_, index) => (
@@ -46,37 +46,47 @@ const SessionsCard = ({ loading = false }) => {
 
   return (
     <aside className="h-[90vh] xl:w-100 lg:w-65 md:w-59 sm:w-48 xs:w-48 bg-gray-100 p-3 sm:p-1 rounded-lg border border-gray-100 shadow-md overflow-y-auto">
-      <h6 className="text-sm sm:text-sm font-semibold mb-3 sm:mb-4 ml-2 text-gray-500">Sessions</h6>
+      <h6 className="text-sm sm:text-sm font-semibold mb-3 sm:mb-4 ml-2 text-gray-500">
+        Sessions
+      </h6>
       <ul className="space-y-2">
         {loading
           ? renderSkeleton()
           : _.map(sessions, (session, idx) => {
-              const { startDate = "", durationMinutes = 0, totalSummary = "-" } = {durationMinutes:1, totalSummary:1}
-           
+              const { durationMinutes = 0, totalSummary = "-" } = {
+                durationMinutes: 1,
+                totalSummary: 1,
+              };
+
               return (
                 <li
                   key={idx}
-                  onClick={()=>handleSession(sessions)}
+                  onClick={() => handleSession(sessions)}
                   className={`p-2 sm:p-3 rounded-lg shadow-sm border cursor-pointer ${
-                    location.pathname === `/dashboard/session/${session.sessionId}`
+                    location.pathname ===
+                    `/dashboard/session/${session.sessionId}`
                       ? "bg-green-50 border-l-4 border-green-500"
                       : "border-gray-400"
                   }`}
                 >
                   <div className="flex items-center rounded-lg">
-                    <Mic className="w-7 h-7 text-gray-800 mr-2" />
+                    <Mic className="w-4 h-4 text-gray-800 mr-2" />
                     <div className="flex flex-col flex-grow truncate">
-                    <TooltipProvider>
-                                  <Tooltip>
-                                    <TooltipTrigger>
-                                    <h3 className="text-sm font-medium text-gray-800 truncate">{session.tabInfo.title}</h3>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                    {session.tabInfo.title}
-                                    </TooltipContent>
-                                  </Tooltip>
-                                </TooltipProvider>
-                     
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <h3 className="text-sm font-medium text-gray-800 truncate">
+                              {session.tabInfo?.title ||
+                                SESSIONS_MAP[session.type]}
+                            </h3>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            {session.tabInfo?.title ||
+                              SESSIONS_MAP[session.type]}
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+
                       <div className="flex justify-evenly">
                         <div className="flex items-center text-gray-600 space-x-1">
                           <FileText className="w-3 h-3" />

@@ -20,3 +20,9 @@ export const HEADERS = {
   "Content-Type": "application/json",
   Accept: "application/json",
 }
+
+export const SESSIONS_MAP = {
+  instant: "Live Audio Recording",
+  file: "Uploaded Audio File",
+  video: "Recorded Video Session"
+};

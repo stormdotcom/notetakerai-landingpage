@@ -3,23 +3,12 @@ import {
   faGoogle,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "./Views/AuthLayout";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log("Registering with:", { fullName, email, password });
-    navigate("/dashboard");
-  };
 
   const handleOAuthSignup = (provider) => {
     console.log(`Signing up with ${provider}`);
@@ -55,60 +44,6 @@ const Register = () => {
             Sign up with Twitter
           </button>
         </div>
-
-        <div className="flex items-center my-4">
-          <div className="flex-1 border-t border-gray-600"></div>
-          <p className="px-4 text-gray-400">OR</p>
-          <div className="flex-1 border-t border-gray-600"></div>
-        </div>
-
-        <form className="space-y-4" onSubmit={handleRegister}>
-          <div className="flex items-center border border-gray-600 rounded-lg px-4 py-3 bg-gray-700">
-            <FontAwesomeIcon icon={faUser} className="text-green-400 mr-3" />
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full bg-transparent outline-none text-white placeholder-gray-400"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="flex items-center border border-gray-600 rounded-lg px-4 py-3 bg-gray-700">
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              className="text-green-400 mr-3"
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full bg-transparent outline-none text-white placeholder-gray-400"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="flex items-center border border-gray-600 rounded-lg px-4 py-3 bg-gray-700">
-            <FontAwesomeIcon icon={faLock} className="text-green-400 mr-3" />
-            <input
-              type="password"
-              placeholder="Create Password"
-              className="w-full bg-transparent outline-none text-white placeholder-gray-400"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full px-4 py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-bold transition duration-300"
-          >
-            Register
-          </button>
-        </form>
 
         <p className="text-center text-gray-400 text-sm">
           Already have an account?{" "}

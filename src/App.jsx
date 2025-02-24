@@ -1,59 +1,79 @@
+import { Suspense, lazy } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 
 import { PrivateRoute, PublicRoute } from "./components/custom/AuthGuard";
+import Loader from "./components/custom/Loader";
 import { AudioProvider } from "./context/AudioContext";
 import { SessionProvider } from "./context/SessionContext";
 import { UserProvider } from "./context/UserContext";
-import DashboardLayout from "./layouts/DashboardLayout";
-import TranscriptionInterface from "./modules/home/components/Audio/TranscriptionInterface";
-import SessionDashboard from "./modules/home/components/HomeDashboard";
-import Middle from "./modules/home/components/Middle";
-import UserHome from "./modules/home/components/UserHome";
-import Login from "./page/auth/Login";
-import Register from "./page/auth/Register";
-import ErrorPage from "./page/ErrorPage";
-import HomeLayout from "./page/HomeLayout";
-import LandingPage from "./page/landing/LandingPage";
-import PrivacyPolicy from "./page/privacy/PrivacyPolicy";
 
+// ** Lazy Loading Components for Code Splitting **
+const DashboardLayout = lazy(() => import("./layouts/DashboardLayout"));
+const TranscriptionInterface = lazy(() =>
+  import("./modules/home/components/Audio/TranscriptionInterface")
+);
+const SessionDashboard = lazy(() =>
+  import("./modules/home/components/HomeDashboard")
+);
+const Middle = lazy(() => import("./modules/home/components/Middle"));
+const UserHome = lazy(() => import("./modules/home/components/UserHome"));
+const Login = lazy(() => import("./page/auth/Login"));
+const Register = lazy(() => import("./page/auth/Register"));
+const ErrorPage = lazy(() => import("./page/ErrorPage"));
+const HomeLayout = lazy(() => import("./page/HomeLayout"));
+const LandingPage = lazy(() => import("./page/landing/LandingPage"));
+const PrivacyPolicy = lazy(() => import("./page/privacy/PrivacyPolicy"));
+const RichTextEditor = lazy(() =>
+  import("./modules/home/components/Editor/RichTextEditor")
+);
 function App() {
   return (
     <HashRouter>
       <UserProvider>
         <SessionProvider>
           <AudioProvider>
-            <Routes>
-              {/* Common Route */}
-              <Route path="/" element={<HomeLayout />}>
-                <Route index element={<LandingPage />} />
-                <Route path="privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="*" element={<ErrorPage />} />
-              </Route>
-              <Route element={<PublicRoute />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-              </Route>
-
-              <Route element={<PrivateRoute />}>
-                <Route path="/dashboard" element={<DashboardLayout />}>
-                  <Route index element={<UserHome />} />
-                  <Route
-                    path="session/:sessionId"
-                    element={<SessionDashboard />}
-                  >
-                    <Route index element={<Middle />} />
-                  </Route>
-                  <Route
-                    path="audio/record/:sessionId"
-                    element={<TranscriptionInterface />}
-                  />
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                {/* Common Route */}
+                <Route path="/" element={<HomeLayout />}>
+                  <Route index element={<LandingPage />} />
+                  <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="*" element={<ErrorPage />} />
                 </Route>
-              </Route>
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
+
+                {/* Public Routes (Login/Register) */}
+                <Route element={<PublicRoute />}>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
+
+                {/* Private Routes (Authenticated) */}
+                <Route element={<PrivateRoute />}>
+                  <Route path="/dashboard" element={<DashboardLayout />}>
+                    <Route index element={<UserHome />} />
+                    <Route
+                      path="session/:sessionId"
+                      element={<SessionDashboard />}
+                    >
+                      <Route index element={<Middle />} />
+                    </Route>
+                    <Route
+                      path="session/:sessionId/edit"
+                      element={<RichTextEditor />}
+                    />
+                    <Route
+                      path="audio/record/:sessionId"
+                      element={<TranscriptionInterface />}
+                    />
+                  </Route>
+                </Route>
+
+                {/* Catch-All Error Page */}
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+            </Suspense>
             <ToastContainer />
           </AudioProvider>
         </SessionProvider>

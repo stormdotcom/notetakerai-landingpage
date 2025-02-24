@@ -15,24 +15,25 @@ import {
 } from "@/components/ui/select";
 import { useAudio } from "@/context/AudioContext";
 import { Mic } from "lucide-react";
+import moment from "moment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { generateUUID } from "../../utils/homeUtils";
 
 const UploadAudioCard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [language, setLanguage] = useState(""); // For language selection
 
   const navigate = useNavigate();
 
-  const { startMediaRecorder } = useAudio();
+  const { startMediaRecorder, language, setLanguage } = useAudio();
 
   const handleStartRecording = async () => {
     try {
       await startMediaRecorder();
       const sessionId = generateUUID();
+      const date = moment().unix();
       navigate(`/dashboard/audio/record/${sessionId}`, {
-        state: { language },
+        state: { language, date },
       });
       console.log("Recording started...");
     } catch (error) {
@@ -55,17 +56,13 @@ const UploadAudioCard = () => {
         <p className="mt-2 text-sm font-medium tracking-wide">Instant record</p>
       </div>
 
-      {/* Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-lg">
-          {/* Modal Header */}
           <DialogHeader>
             <DialogTitle>Instant record</DialogTitle>
           </DialogHeader>
 
-          {/* Modal Body */}
           <div className="space-y-4">
-            {/* Transcription Language Selector */}
             <div>
               <label
                 htmlFor="language"
@@ -94,9 +91,9 @@ const UploadAudioCard = () => {
               Cancel
             </Button>
 
-              <Button onClick={handleStartRecording}>
-                Record and transcribe
-              </Button>
+            <Button onClick={handleStartRecording}>
+              Record and transcribe
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -1,0 +1,102 @@
+/* Global Editor Styles */
+.editor-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Menu Bar */
+  .control-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: #f7f7f7;
+    padding: 8px;
+    border-radius: 6px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 5px;
+  }
+  
+  /* Buttons */
+  button {
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #ddd;
+  
+    &:hover {
+      background: #f0f0f0;
+    }
+  
+    &.is-active {
+      background: #16a34a;
+      color: white;
+      border-color: #16a34a;
+    }
+  
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  /* Editor Content */
+  .tiptap {
+    min-height: 200px;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+  
+    p {
+      margin: 8px 0;
+    }
+  
+    blockquote {
+      border-left: 4px solid #16a34a;
+      padding-left: 10px;
+      font-style: italic;
+      color: #555;
+    }
+  
+    pre {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  
+    code {
+      background: #eee;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  }
+  
+  /* Lists */
+  ul,
+  ol {
+    padding-left: 20px;
+  }
+  
+  ul {
+    list-style-type: disc;
+  }
+  
+  ol {
+    list-style-type: decimal;
+  }
+  
