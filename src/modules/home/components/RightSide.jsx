@@ -1,10 +1,11 @@
 import ExportData from "@/components/custom/Modal/ExportData";
 import ShareContent from "@/components/custom/Modal/ShareData";
-import { FileEdit, Settings } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { ClipboardList, FileEdit } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const RightSidebar = () => {
   const navigate = useNavigate();
+  const { sessionId } = useParams();
   return (
     <>
       <div className="xs:w-3/4 md:w-full max-h-[40vh] overflow-y-auto p-3 bg-gray-50 shadow-md rounded-lg">
@@ -26,9 +27,12 @@ const RightSidebar = () => {
         <hr className="my-3 border-t border-gray-300" />
 
         {/* Settings */}
-        <button className="w-full flex items-center justify-start gap-2 py-2 px-3 text-sm text-green-700 border border-green-700 rounded-md hover:bg-gray-100 transition mb-3">
-          <Settings size={18} />
-          Settings
+        <button
+          onClick={() => navigate(`../session/${sessionId}/usage`)}
+          className="w-full flex items-center justify-start gap-2 py-2 px-3 text-sm text-green-700 border border-green-700 rounded-md hover:bg-gray-100 transition mb-3"
+        >
+          <ClipboardList size={18} />
+          View Usage
         </button>
         <ShareContent />
       </div>

@@ -86,8 +86,10 @@ const UserHome = () => {
                         >
                           <p className="truncate">
                             {" "}
-                            {record?.tabInfo?.title ||
-                              SESSIONS_MAP[record.type]}
+                            {record.type === "instant"
+                              ? record?.title
+                              : record?.tabInfo?.title ||
+                                SESSIONS_MAP[record.type]}
                           </p>
                         </a>
                       )}

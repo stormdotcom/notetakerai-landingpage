@@ -97,9 +97,9 @@ const Toolbar = () => {
 
       {/* 🎨 Text Color (Green) */}
       <ToolbarButton
-        onClick={() => editor.chain().focus().setColor("#16a34a").run()}
-        isActive={editor.isActive("textStyle", { color: "#16a34a" })}
-        icon={<PaintBucket size={18} className="text-green-500" />}
+        onClick={() => editor.chain().focus().setColor("#16a342").run()}
+        isActive={editor.isActive("textStyle", { color: "#16a342" })}
+        icon={<PaintBucket size={18} className="text-gray-500" />}
       />
     </div>
   );

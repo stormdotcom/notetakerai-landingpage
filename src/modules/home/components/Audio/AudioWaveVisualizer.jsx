@@ -5,13 +5,19 @@ import { LiveAudioVisualizer } from "react-audio-visualize";
 import { useParams } from "react-router-dom";
 
 const AudioWaveVisualizer = () => {
-  const { mediaRecorder, initSession, setSessionId } = useAudio();
+  const { mediaRecorder, initSession, setSessionId, language } = useAudio();
   const { sessionId } = useParams();
   const browserInfo = getBrowserInfo();
   const timeStamp = Date.now().toString();
   useEffect(() => {
     setSessionId(sessionId);
-    initSession({ sessionId, type: "instant", browserInfo, timeStamp });
+    initSession({
+      sessionId,
+      type: "instant",
+      browserInfo,
+      timeStamp,
+      language,
+    });
   }, []);
   return (
     <div className="flex flex-col items-center space-y-4">

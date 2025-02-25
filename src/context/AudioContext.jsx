@@ -1,14 +1,19 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
-import { createAudioSession, sendInstantAudio } from "@/app/api";
-import { CONTENT_TEST } from "@/modules/home/constant";
+import {
+  createAudioSession,
+  fetchSessionCard,
+  fetchSessionList,
+  getContentById,
+  saveContentById,
+  sendInstantAudio,
+} from "@/app/api";
+import { CONTENT_TEST, USAGE_CARD } from "@/modules/home/constant";
 import { handleResponseError } from "@/utils/errorHandler";
 import { createContext, useContext, useRef, useState } from "react";
 
-// Create Context
 const AudioContext = createContext();
 
-// Context Provider
 export const AudioProvider = ({ children }) => {
   const [mediaStream, setMediaStream] = useState(null);
   const [mediaRecorder, setMediaRecorder] = useState(null);
@@ -24,6 +29,7 @@ export const AudioProvider = ({ children }) => {
   const [sessionId, setSessionId] = useState("");
   const [realTimeTranslation, setRealTimeTranslation] = useState(false);
   const [content, setContent] = useState(CONTENT_TEST);
+  const [usageCard, setUsageCard] = useState(USAGE_CARD);
 
   const initSession = async (data) => {
     setLoading(true);
@@ -37,11 +43,29 @@ export const AudioProvider = ({ children }) => {
 
   const getMarkDownContent = async (data) => {
     setLoading(true);
+    setContent("");
     try {
-      const res = await createAudioSession(data);
-      setContent(res.data);
+      if (data) {
+        const res = await getContentById(data);
+        setContent(res.data);
+      }
+
       setLoading(false);
     } catch (error) {
+      setLoading(false);
+      await handleResponseError(error);
+    }
+  };
+
+  const saveContent = async (sessionId) => {
+    setLoading(true);
+    try {
+      if (sessionId) {
+        await saveContentById({ sessionId, content });
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
       await handleResponseError(error);
     }
   };
@@ -152,10 +176,37 @@ export const AudioProvider = ({ children }) => {
     }
     return false;
   };
+  const getUsageCard = async (sessionId) => {
+    setLoading(true);
+    try {
+      if (sessionId) {
+        const res = await fetchSessionCard(sessionId);
+        setUsageCard(res.data);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      await handleResponseError(error);
+    }
+  };
+
+  const getUsageTable = async (sessionId) => {
+    setLoading(true);
+    try {
+      if (sessionId) {
+        await fetchSessionList(sessionId);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      await handleResponseError(error);
+    }
+  };
 
   return (
     <AudioContext.Provider
       value={{
+        setContent,
         content,
         realTimeTranslation,
         setRealTimeTranslation,
@@ -175,6 +226,11 @@ export const AudioProvider = ({ children }) => {
         language,
         setLanguage,
         getMarkDownContent,
+        saveContent,
+        getUsageCard,
+        getUsageTable,
+        usageCard,
+        setUsageCard,
       }}
     >
       {children}

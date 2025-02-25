@@ -1,7 +1,7 @@
+import BackButton from "@/components/custom/BackButton";
 import { useAudio } from "@/context/AudioContext";
 import { AlertCircle, Bookmark, Mic, Share, Trash } from "lucide-react";
 import moment from "moment";
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import AudioWaveVisualizer from "./AudioWaveVisualizer";
 
@@ -33,22 +33,13 @@ const TranscriptionInterface = () => {
     ).padStart(2, "0")}`;
   };
 
-  // State for holding recording UI state
-  const [holding, setHolding] = useState(false);
-  const [cancelled, setCancelled] = useState(false);
-
-  // Handle hold-to-record (WhatsApp-style)
-  const handleHoldStart = () => {
-    setHolding(true);
-    setCancelled(false);
-    startMediaRecorder();
-  };
-
-  const handleHoldEnd = () => {
-    if (!cancelled) {
+  // Handle single click to start/stop recording
+  const toggleRecording = () => {
+    if (isRecording) {
       stopMediaRecorder();
+    } else {
+      startMediaRecorder();
     }
-    setHolding(false);
   };
 
   const handleTranslationChange = (event) => {
@@ -56,10 +47,10 @@ const TranscriptionInterface = () => {
       setRealTimeTranslation(event.target.value === "on");
     }
   };
-
   return (
     <div className="p-6 h-screen w-full bg-gray-50 flex flex-col items-center">
-      {/* Header */}
+      <BackButton />
+
       <div className="flex justify-between items-center w-full max-w-3xl mb-4">
         <div>
           <h1 className="text-lg font-medium flex items-center space-x-2">
@@ -90,7 +81,7 @@ const TranscriptionInterface = () => {
           <div className="flex items-center space-x-2">
             <p className="text-sm font-medium">
               {realTimeTranslation && (
-                <span className="w-2 h-2 mt-1  animate-pulse">⚡</span>
+                <span className="w-2 h-2 mt-1 animate-pulse">⚡</span>
               )}
               Real-time translation
             </p>
@@ -139,7 +130,7 @@ const TranscriptionInterface = () => {
           </div>
         )}
 
-        {/* WhatsApp-Style Recording Controls */}
+        {/* Recording Controls */}
         <div className="flex items-center space-x-4 mt-6">
           {/* Display Recording Time */}
           <button className="flex items-center bg-blue-100 text-blue-500 px-4 py-2 rounded-full shadow">
@@ -147,28 +138,21 @@ const TranscriptionInterface = () => {
             <span>{formatElapsedTime(elapsedTime)}</span>
           </button>
 
-          {/* WhatsApp-Style Hold to Record */}
+          {/* Click-to-Record Button */}
           <button
             className={`flex items-center px-6 py-3 rounded-full transition duration-300 shadow-md ${
-              holding ? "bg-red-500 text-white" : "bg-green-500 text-white"
+              isRecording ? "bg-red-500 text-white" : "bg-green-500 text-white"
             }`}
-            onMouseDown={handleHoldStart}
-            onMouseUp={handleHoldEnd}
-            onTouchStart={handleHoldStart}
-            onTouchEnd={handleHoldEnd}
+            onClick={toggleRecording}
           >
-            {holding ? "Recording..." : "Hold to Record"}
+            {isRecording ? "Stop Recording" : "Start Recording"}
           </button>
 
-          {/* Cancel Button */}
-          {holding && (
+          {/* Delete Button (only when recording is active) */}
+          {isRecording && (
             <button
               className="text-gray-600 hover:text-gray-800 transition duration-300"
-              onClick={() => {
-                stopMediaRecorder();
-                setHolding(false);
-                setCancelled(true);
-              }}
+              onClick={stopMediaRecorder}
             >
               <Trash size={24} />
             </button>

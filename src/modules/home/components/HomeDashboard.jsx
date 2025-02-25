@@ -1,4 +1,5 @@
 import { getRequest } from "@/app/service";
+import BackButton from "@/components/custom/BackButton";
 import { useSession } from "@/context/SessionContext";
 import SessionsCard from "@/modules/home/components/SessionsCard";
 import { useEffect, useState } from "react";
@@ -29,15 +30,15 @@ const SessionDashboard = () => {
   return (
     <div className="grid grid-cols-3 lg:grid-cols-5 h-screen gap-1">
       {/* Left Sidebar */}
+
       <div className="col-span-1 lg:col-span-1 p-1 sm:p-1 bg-gray-100">
         <SessionsCard loading={loading} />
       </div>
-
       {/* Middle Content */}
       <div className="lg:col-span-3 p-1 sm:p-2 bg-white overflow-y-auto">
+        <BackButton extraClass="w-half" />
         <Outlet />
       </div>
-
       {/* Right Sidebar */}
       <div className="col-span-1 lg:col-span-1 p-2 sm:p-3 bg-gray-100">
         <RightSidebar />

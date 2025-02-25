@@ -24,3 +24,19 @@ export const sendInstantAudio = async (formData) => {
         throw error;
     }
 };
+
+export const getContentById = async sessionId => {
+    return apiClient.get(API_ENDPOINTS.SESSION.CONTENT.replace(":sessionId", sessionId))
+}
+
+export const saveContentById = async ({ sessionId, content }) => {
+    return apiClient.patch(API_ENDPOINTS.SESSION.CONTENT.replace(":sessionId", sessionId), { content })
+}
+
+export const fetchSessionCard = async (sessionId) => {
+    return apiClient.get(API_ENDPOINTS.SESSION.USAGE_CARD.replace(":sessionId", sessionId))
+}
+
+export const fetchSessionList = async (sessionId) => {
+    return apiClient.get(API_ENDPOINTS.SESSION.USAGE_LIST.replace(":sessionId", sessionId))
+}

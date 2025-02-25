@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Video } from "lucide-react";
 import { useState } from "react";
@@ -70,10 +70,9 @@ const RecordOnlineMeetingCard = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="English">English</SelectItem>
-                <SelectItem value="Spanish">Spanish</SelectItem>
-                <SelectItem value="French">French</SelectItem>
-                <SelectItem value="German">German</SelectItem>
+                <SelectItem value="Arabic">French</SelectItem>
                 <SelectItem value="Malayalam">Malayalam</SelectItem>
+                <SelectItem value="Spanish">Spanish</SelectItem>
               </SelectContent>
             </Select>
           </div>

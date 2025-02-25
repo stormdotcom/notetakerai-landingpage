@@ -28,13 +28,10 @@ export const SESSIONS_MAP = {
 };
 
 
-export const CONTENT_TEST = `
-<h2>Hi there,</h2>
-<p>This is a <em>basic</em> example of <strong>Tiptap</strong>.</p>
-<ul>
-  <li>• Bullet List Item</li>
-  <li>• Another Item</li>
-</ul>
-<p>Try editing this text. You can also <code>write code</code>!</p>
-<blockquote>Wow, this is great! — Someone</blockquote>
-`;
+export const CONTENT_TEST = ""
+
+export const USAGE_CARD = {
+  totalTokensUsed: "",
+  lastUsed: "",
+  featureUsage: [],
+}

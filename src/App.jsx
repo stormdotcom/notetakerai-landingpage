@@ -8,6 +8,7 @@ import Loader from "./components/custom/Loader";
 import { AudioProvider } from "./context/AudioContext";
 import { SessionProvider } from "./context/SessionContext";
 import { UserProvider } from "./context/UserContext";
+import ViewUsage from "./modules/home/components/Usage/ViewUsage";
 
 // ** Lazy Loading Components for Code Splitting **
 const DashboardLayout = lazy(() => import("./layouts/DashboardLayout"));
@@ -62,6 +63,10 @@ function App() {
                     <Route
                       path="session/:sessionId/edit"
                       element={<RichTextEditor />}
+                    />
+                    <Route
+                      path="session/:sessionId/usage"
+                      element={<ViewUsage />}
                     />
                     <Route
                       path="audio/record/:sessionId"
